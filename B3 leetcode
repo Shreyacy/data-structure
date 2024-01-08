@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct MyStack {
+    int *data;
+    int top;
+    int capacity;
+} MyStack;
+
+
+MyStack* myStackCreate() {
+    MyStack* obj = (MyStack*)malloc(sizeof(MyStack));
+    obj->data = (int*)malloc(sizeof(int) * 1000);
+    obj->top = -1;
+    obj->capacity = 1000;
+    return obj;
+}
+
+void myStackPush(MyStack* obj, int x) {
+    obj->top++;
+    obj->data[obj->top] = x;
+}
+
+int myStackPop(MyStack* obj) {
+    int popped = obj->data[obj->top];
+    obj->top--;
+    return popped;
+}
+
+int myStackTop(MyStack* obj) {
+    return obj->data[obj->top];
+}
+
+bool myStackEmpty(MyStack* obj) {
+    return obj->top == -1;
+}
+
+void myStackFree(MyStack* obj) {
+    free(obj->data);
+    free(obj);
+}
